@@ -18,7 +18,7 @@ class Config(object):
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['cortland.goffena@hotmail.com']
+    ADMIN = os.environ.get('ADMIN')
 
     POSTS_PER_PAGE = int(os.environ.get('POSTS_PER_PAGE', 25))
 
