@@ -1,0 +1,12 @@
+__pycache__
+.flask_env
+.env
+.pytest_cache
+messages.pot
+*.mo
+*.po
+flasky.log*
+.vscode
+*.pyc
+start_local_elasticsearch.ps1
+stop_local_elasticsearch.ps1
