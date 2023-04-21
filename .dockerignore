@@ -1,5 +1,5 @@
 __pycache__
-.flask_env
+.flaskenv
 .env
 .pytest_cache
 messages.pot
