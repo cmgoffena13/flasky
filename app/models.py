@@ -10,7 +10,6 @@ from hashlib import md5
 from time import time
 from flask import current_app
 from datetime import datetime
-from time import time
 
 
 class SearchableMixin(object):
@@ -169,6 +168,8 @@ class Post(SearchableMixin, db.Model):
 
     def __repr__(self):
         return f'<Post {self.body}>'
+
+
 class Message(db.Model):
     __tablename__ = 'messages'
 
