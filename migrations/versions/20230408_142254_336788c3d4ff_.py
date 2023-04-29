@@ -23,9 +23,9 @@ def upgrade():
     sa.Column('username', sa.VARCHAR(length=64), nullable=True),
     sa.Column('email', sa.VARCHAR(length=120), nullable=True),
     sa.Column('password_hash', sa.VARCHAR(length=128), nullable=True),
-    sa.Column('created_on', postgresql.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_on', postgresql.TIMESTAMP(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
     sa.Column('about_me', sa.VARCHAR(length=140), nullable=True),
-    sa.Column('last_seen', postgresql.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column('last_seen', postgresql.TIMESTAMP(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
     sa.PrimaryKeyConstraint('user_id', name=op.f('pk_users'))
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
@@ -41,7 +41,7 @@ def upgrade():
     op.create_table('posts',
     sa.Column('post_id', sa.INTEGER(), nullable=False),
     sa.Column('body', sa.VARCHAR(length=4000), nullable=True),
-    sa.Column('timestamp', postgresql.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=True),
+    sa.Column('timestamp', postgresql.TIMESTAMP(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=True),
     sa.Column('user_id', sa.INTEGER(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.user_id'], name=op.f('fk_posts_user_id_users')),
     sa.PrimaryKeyConstraint('post_id', name=op.f('pk_posts'))

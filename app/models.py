@@ -1,4 +1,5 @@
 import jwt
+import json
 from app import db, login
 from app.search import add_to_index, remove_from_index, query_index
 from sqlalchemy.dialects.postgresql import *
@@ -8,6 +9,8 @@ from flask_login import UserMixin
 from hashlib import md5
 from time import time
 from flask import current_app
+from datetime import datetime
+from time import time
 
 
 class SearchableMixin(object):
@@ -71,14 +74,18 @@ class User(UserMixin, db.Model):
     created_on = db.Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now()) # this doesn't generate in alembic correctly..
     about_me = db.Column(VARCHAR(140))
     last_seen = db.Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
+    last_message_read_time = db.Column(TIMESTAMP(timezone=True))
 
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-
-    followed = db.relationship('User', secondary=followers, 
+    followed = db.relationship('User', 
+                               secondary=followers, 
                                primaryjoin=(followers.c.follower_id == user_id),
                                secondaryjoin=(followers.c.followed_id == user_id),
-                               backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
-                               )
+                               backref=db.backref('followers', lazy='dynamic'), 
+                               lazy='dynamic')
+    messages_sent = db.relationship('Message', foreign_keys='Message.sender_id', backref='author', lazy='dynamic')
+    messages_received = db.relationship('Message', foreign_keys='Message.recipient_id', backref='recipient', lazy='dynamic')
+    notifications = db.relationship('Notification', backref='users', lazy='dynamic')
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -130,6 +137,16 @@ class User(UserMixin, db.Model):
         )
         own = Post.query.filter_by(user_id = self.user_id)
         return followed.union(own).order_by(Post.timestamp.desc())
+    
+    def new_messages(self):
+        last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
+        return Message.query.filter_by(recipient_id = self.user_id).filter(Message.timestamp > last_read_time).count()
+    
+    def add_notification(self, name, data):
+        n = Notification(name=name, payload_json=json.dumps(data), user_id=self.user_id)
+        self.notifications.filter_by(name=name).delete()
+        db.session.add(n)
+        return n
 
 
 @login.user_loader
@@ -152,3 +169,27 @@ class Post(SearchableMixin, db.Model):
 
     def __repr__(self):
         return f'<Post {self.body}>'
+class Message(db.Model):
+    __tablename__ = 'messages'
+
+    message_id = db.Column(INTEGER, primary_key=True)
+    sender_id = db.Column(INTEGER, db.ForeignKey("users.user_id"))
+    recipient_id = db.Column(INTEGER, db.ForeignKey("users.user_id"))
+    body = db.Column(VARCHAR(500))
+    timestamp = db.Column(TIMESTAMP(timezone=True), index=True, server_default=func.now())
+
+    def __repr__(self):
+        return f'<Message {self.body}>'
+    
+
+class Notification(db.Model):
+    __tablename__ = 'notifications'
+
+    notification_id = db.Column(BIGINT, primary_key=True)
+    name = db.Column(VARCHAR(128), index=True)
+    user_id = db.Column(INTEGER, db.ForeignKey('users.user_id'))
+    timestamp = db.Column(NUMERIC(16,6), index=True, default=time)
+    payload_json = db.Column(VARCHAR)
+
+    def get_data(self):
+        return json.loads(str(self.payload_json))

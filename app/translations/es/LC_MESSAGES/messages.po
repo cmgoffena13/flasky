@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-20 00:22-0500\n"
+"POT-Creation-Date: 2023-04-28 21:31-0500\n"
 "PO-Revision-Date: 2023-04-14 21:25-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "About me"
 msgstr ""
 
-#: app/main/forms.py:12 app/main/forms.py:31
+#: app/main/forms.py:12 app/main/forms.py:31 app/main/forms.py:47
 msgid "Submit"
 msgstr ""
 
@@ -109,6 +109,10 @@ msgstr ""
 
 #: app/main/forms.py:35 app/main/routes.py:168
 msgid "Search"
+msgstr ""
+
+#: app/main/forms.py:46
+msgid "Message"
 msgstr ""
 
 #: app/main/routes.py:35
@@ -139,7 +143,15 @@ msgstr ""
 msgid "You cannot unfollow yourself!"
 msgstr ""
 
-#: app/templates/_post.html:28
+#: app/main/routes.py:188
+msgid "Your message has been sent!"
+msgstr ""
+
+#: app/main/routes.py:190
+msgid "Send Message"
+msgstr ""
+
+#: app/templates/_post.html:33
 msgid "Translate"
 msgstr ""
 
@@ -155,20 +167,32 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: app/templates/base.html:33
+#: app/templates/base.html:33 app/templates/messages.html:4
+msgid "Messages"
+msgstr ""
+
+#: app/templates/base.html:34
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:83
+#: app/templates/base.html:84
 msgid "Error: Could not contact server"
 msgstr ""
 
-#: app/templates/index.html:19 app/templates/user.html:61
+#: app/templates/index.html:19 app/templates/user.html:69
 msgid "Newer Posts"
 msgstr ""
 
-#: app/templates/index.html:24 app/templates/user.html:65
+#: app/templates/index.html:24 app/templates/user.html:73
 msgid "Older Posts"
+msgstr ""
+
+#: app/templates/messages.html:15
+msgid "Newer Messages"
+msgstr ""
+
+#: app/templates/messages.html:20
+msgid "Older Messages"
 msgstr ""
 
 #: app/templates/search.html:4
@@ -193,6 +217,18 @@ msgstr ""
 
 #: app/templates/user.html:28
 msgid "Edit your profile"
+msgstr ""
+
+#: app/templates/user.html:50
+msgid "Send private message"
+msgstr ""
+
+#: app/templates/user_popup.html:22
+msgid "Follow"
+msgstr ""
+
+#: app/templates/user_popup.html:29
+msgid "Unfollow"
 msgstr ""
 
 #: app/templates/auth/login.html:12
