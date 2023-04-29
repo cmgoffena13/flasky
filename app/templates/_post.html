@@ -6,11 +6,16 @@
             </a>
         </td>
         <td>
-            <a href="{{ url_for('main.user', username=post.author.username) }}">
-                {{ post.author.username }}
-            </a>
+            {% set user_link %}
+                <span class="user_popup">
+                    <a href="{{ url_for('main.user', username=post.author.username) }}">
+                        {{ post.author.username }}
+                    </a>
+                </span>
+            {% endset %}
+
             {# The ~ operator makes the variable a string #}
-            {{ _('said ' ~ moment(post.timestamp, local=True).fromNow() ~ ':') }}
+            {{ _('' ~ user_link ~ ' said ' ~ moment(post.timestamp, local=True).fromNow() ~ ':') }}
             <br>
 
             <span id="post{{ post.id }}">{{ post.body }}</span>
