@@ -55,6 +55,19 @@
 
 {% block content %}
     <div class="container">
+        {% if current_user.is_authenticated %}
+        {% with tasks = current_user.get_tasks_in_progress() %}
+        {% if tasks %}
+            {% for task in tasks %}
+            <div class="alert alert-success" role="alert">
+                {{ task.description }}
+                <span id="{{ task.task_id }}-progress">{{ task.get_progress() }}</span>%
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% endif %}
+
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -68,6 +81,7 @@
         {% endblock %}
     </div>
 {% endblock %}
+
 
 {% block scripts %}
     {{ super() }}
@@ -149,8 +163,15 @@
                 $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
                     function(notifications) {
                         for (var index = 0; index < notifications.length; index++) {
-                            if (notifications[index].name == 'unread_message_count')
-                                set_message_count(notifications[index].data);
+                            switch (notifications[index].name) {
+                                case 'unread_messages_count':
+                                    set_message_count(notifications[index].data);
+                                    break;
+                                case 'task_progress':
+                                    set_task_progress(notifications[index].data.task_id, 
+                                    notifications[index].data.progress);
+                                    break;
+                            }
                             since = notifications[index].timestamp;
                         }
                     }
@@ -158,6 +179,10 @@
             }, 10000); // 10 seconds
         });
         {% endif %}
+
+        function set_task_progress(task_id, progress) {
+            $('#' + task_id + '-progress').text(progress);
+        }
     </script>
 
 {% endblock %}

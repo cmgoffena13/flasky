@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-28 21:31-0500\n"
+"POT-Creation-Date: 2023-05-06 13:16-0500\n"
 "PO-Revision-Date: 2023-04-14 21:25-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:31
+#: app/__init__.py:33
 msgid "Please log in to access this page."
 msgstr ""
 
@@ -143,12 +143,20 @@ msgstr ""
 msgid "You cannot unfollow yourself!"
 msgstr ""
 
-#: app/main/routes.py:188
+#: app/main/routes.py:189
 msgid "Your message has been sent!"
 msgstr ""
 
-#: app/main/routes.py:190
+#: app/main/routes.py:191
 msgid "Send Message"
+msgstr ""
+
+#: app/main/routes.py:228
+msgid "An export task is currently in progress"
+msgstr ""
+
+#: app/main/routes.py:230
+msgid "Exporting Posts..."
 msgstr ""
 
 #: app/templates/_post.html:33
@@ -167,23 +175,23 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: app/templates/base.html:33 app/templates/messages.html:4
+#: app/templates/base.html:34 app/templates/messages.html:4
 msgid "Messages"
 msgstr ""
 
-#: app/templates/base.html:34
+#: app/templates/base.html:41
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:84
+#: app/templates/base.html:108
 msgid "Error: Could not contact server"
 msgstr ""
 
-#: app/templates/index.html:19 app/templates/user.html:69
+#: app/templates/index.html:19 app/templates/user.html:76
 msgid "Newer Posts"
 msgstr ""
 
-#: app/templates/index.html:24 app/templates/user.html:73
+#: app/templates/index.html:24 app/templates/user.html:80
 msgid "Older Posts"
 msgstr ""
 
@@ -219,7 +227,11 @@ msgstr ""
 msgid "Edit your profile"
 msgstr ""
 
-#: app/templates/user.html:50
+#: app/templates/user.html:33
+msgid "Export your posts"
+msgstr ""
+
+#: app/templates/user.html:57
 msgid "Send private message"
 msgstr ""
 
