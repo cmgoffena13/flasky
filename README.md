@@ -18,7 +18,7 @@
 - Added in Docker scripts for ease of development, docker start includes volume mount so modification of repo code is reflected without needing to start/stop again (switched to docker-compose for ease of use)
 - Added in .env.example and .flaskenv.example files
 - Added in Docker-Compose to orchestrate the redis queue and rq worker services
-- Added flask-smorest package for API and marshmallow schemas for validation (re-structured to accomodate)
+- Added flask-smorest package for API and marshmallow schemas for validation (re-structured to accommodate)
 - Includes API swagger documentation at localhost:5000/swagger-ui
 - Setup Postman collections and environment to test the API calls
 
