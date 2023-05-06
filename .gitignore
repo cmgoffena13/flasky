@@ -11,3 +11,4 @@ flasky.log*
 start_local_elasticsearch.ps1
 stop_local_elasticsearch.ps1
 start_local_redis.ps1
+start_docker_development.ps1
