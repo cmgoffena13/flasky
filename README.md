@@ -1,11 +1,26 @@
 # Flasky Website
 ## Tutorial Followed: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
-## Setup
+## Local Development Setup
 1. Create .env and .flaskenv files based upon example files (Doesn't require azure translator service)
 2. Install local Postgres server and create database flasky
 3. Install local elasticsearch server, I ran into a maxmem error when trying docker
 4. Run docker command `docker compose up`
+
+### Application Functionality
+- Register/Login pages: User registration, login/logout, and reset password capability
+- Profile page: shows current user posts, general information, and ability to modify if current user
+- Timeline page: Create text posts as a user,
+- Explore page: explore posts that have been written by all users, pagination included
+- Profile page: Export posts functionality using task queue, shows progress bar and is emailed
+- Profile page: Follow/Unfollow other users to show their posts on your timeline
+- Profile page: Message other users that you follow
+- Popup of user profiles when mouse hovering
+- Message notifications
+- Search capability on posts
+- Can be switched to other languages once translation files are filled out
+- Logs to text files, stdout stream, and emails ADMIN upon errors depending upon configuration
+- API functionality
 
 ### Modifications that I introduced:
 - Using Postgres instead of SQLite
@@ -28,4 +43,4 @@
 - Currently working through Chapter 23, adding API functionality
 - Might look into adding more logging, tutorial skipped it and could add more detail than gunicorn/flask provides
 - Need postgres and elasticsearch locally installed, had issues with max mem for docker elasticsearch so kept local
-- Might explore a use-case for postgres stored procedure
+- Might explore a use-case for postgres stored procedures to put computation on the server side
