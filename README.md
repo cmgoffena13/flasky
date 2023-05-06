@@ -16,10 +16,11 @@
 - Added use of Docker container
 - Added in Docker scripts for ease of development, docker start includes volume mount so modification of repo code is reflected without needing to start/stop again (switched to docker-compose for ease of use)
 - Added in .env.example and .flaskenv.example files
-- Added in Docker-Compose to orchestrate the redis and rq worker services
+- Added in Docker-Compose to orchestrate the redis queue and rq worker services
 
 ### Notes:
 - Skipping the azure translator service currently
-- Currently working through Chapter 22
+- Currently working through Chapter 23
 - Might look into adding more logging, tutorial skipped it and could add more detail than gunicorn/flask provides
 - Need postgres and elasticsearch locally installed, had issues with max mem for docker elasticsearch so kept local
+- Might explore a use-case for postgres stored procedure
