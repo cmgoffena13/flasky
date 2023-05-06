@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM python:3.10
 COPY ./requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
@@ -9,5 +10,7 @@ COPY . .
 EXPOSE 5432
 # Expose Flask/Gunicorn port
 EXPOSE 5000
+# Expose Redis port
+EXPOSE 6379
 # Declare bash script to trigger upon start up
 ENTRYPOINT ["./docker-entrypoint.sh"]

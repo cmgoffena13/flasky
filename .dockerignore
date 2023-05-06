@@ -10,3 +10,4 @@ flasky.log*
 *.pyc
 start_local_elasticsearch.ps1
 stop_local_elasticsearch.ps1
+start_local_redis.ps1
