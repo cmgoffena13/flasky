@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 from time import time
-from flask import current_app
+from flask import current_app, url_for
 from datetime import datetime
 import redis
 import rq
@@ -161,6 +161,26 @@ class User(UserMixin, db.Model):
     
     def get_task_in_progress(self, name):
         return Task.query.filter_by(name=name, user_id = self.user_id, complete=False).first()
+    
+    def to_dict(self, include_email=False):
+        data = {
+            'user_id': self.user_id,
+            'username': self.username,
+            'last_seen': self.last_seen.isoformat() + 'Z', #utc
+            'about_me': self.about_me,
+            'post_count': self.posts.count(),
+            'follower_count': self.followers.count(),
+            'followed_count': self.followed.count(),
+            '_links': {
+                'self': url_for('users.API_User', user_id=self.user_id),
+                'followers': url_for('users.get_followers', user_id=self.user_id),
+                'followed': url_for('users.get_followed', user_id=self.user_id),
+                'avatar': self.avatar(128)
+            }
+        }
+        if include_email:
+            data['email'] = self.email
+        return data
 
 
 @login.user_loader

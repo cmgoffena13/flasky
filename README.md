@@ -2,8 +2,9 @@
 ## Tutorial Followed: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 ## Setup
-1. Create .env and .flaskenv files based upon example files
-2. A local ElasticSearch server is required if you have an elasticsearch URL
+1. Create .env and .flaskenv files based upon example files (Doesn't require azure translator service)
+2. Install local elasticsearch server, I ran into a maxmem error when trying docker
+3. Run docker command `docker compose up`
 
 ### Modifications that I introduced:
 - Using Postgres instead of SQLite
@@ -17,10 +18,13 @@
 - Added in Docker scripts for ease of development, docker start includes volume mount so modification of repo code is reflected without needing to start/stop again (switched to docker-compose for ease of use)
 - Added in .env.example and .flaskenv.example files
 - Added in Docker-Compose to orchestrate the redis queue and rq worker services
+- Added flask-smorest package for API and marshmallow schemas for validation (re-structured to accomodate)
+- Includes API swagger documentation at localhost:5000/swagger-ui
+- Setup Postman collections and environment to test the API calls
 
 ### Notes:
 - Skipping the azure translator service currently
-- Currently working through Chapter 23
+- Currently working through Chapter 23, adding API functionality
 - Might look into adding more logging, tutorial skipped it and could add more detail than gunicorn/flask provides
 - Need postgres and elasticsearch locally installed, had issues with max mem for docker elasticsearch so kept local
 - Might explore a use-case for postgres stored procedure
