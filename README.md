@@ -3,8 +3,9 @@
 
 ## Setup
 1. Create .env and .flaskenv files based upon example files (Doesn't require azure translator service)
-2. Install local elasticsearch server, I ran into a maxmem error when trying docker
-3. Run docker command `docker compose up`
+2. Install local Postgres server and create database flasky
+3. Install local elasticsearch server, I ran into a maxmem error when trying docker
+4. Run docker command `docker compose up`
 
 ### Modifications that I introduced:
 - Using Postgres instead of SQLite
