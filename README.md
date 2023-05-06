@@ -7,11 +7,11 @@
 3. Install local elasticsearch server, I ran into a maxmem error when trying docker
 4. Run docker command `docker compose up`
 
-### Application Functionality
+### Application Functionality (Simple Social Media App)
 - Register/Login pages: User registration, login/logout, and reset password capability
-- Profile page: shows current user posts, general information, and ability to modify if current user
+- Profile page: Shows current user posts, general information, and ability to modify if current user
 - Timeline page: Create text posts as a user,
-- Explore page: explore posts that have been written by all users, pagination included
+- Explore page: Explore posts that have been written by all users, pagination included
 - Profile page: Export posts functionality using task queue, shows progress bar and is emailed
 - Profile page: Follow/Unfollow other users to show their posts on your timeline
 - Profile page: Message other users that you follow
