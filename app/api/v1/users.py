@@ -1,6 +1,6 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from app.api.schemas import UserDataSchema, UserUpdateSchema, UserRegisterSchema, UsersCollectionDataSchema
+from app.api.v1.schemas import UserDataSchema, UserUpdateSchema, UserRegisterSchema, UsersCollectionDataSchema
 from app.models import User
 from flask import jsonify, request
 
@@ -11,7 +11,7 @@ bp = Blueprint(name="users", import_name=__name__, description="Operations on Us
 # POST = INSERT
 # PUT = UPDATE
 # DELETE = DELETE
-@bp.route('/api/users/<int:user_id>')
+@bp.route('/api/v1/users/<int:user_id>')
 class API_User(MethodView):
 
     @bp.response(200, UserDataSchema)
@@ -25,7 +25,7 @@ class API_User(MethodView):
         pass
 
 @bp.response(200, UsersCollectionDataSchema)
-@bp.route('/api/users/<int:user_id>/followers', methods=['GET'])
+@bp.route('/api/v1/users/<int:user_id>/followers', methods=['GET'])
 def get_followers(user_id):
     user = User.query.get_or_404(user_id)
     page = request.args.get(key='page', default=1, type=int)
@@ -34,7 +34,7 @@ def get_followers(user_id):
     return jsonify(data)
 
 @bp.response(200, UsersCollectionDataSchema)
-@bp.route('/api/users/<int:user_id>/followed', methods=['GET'])
+@bp.route('/api/v1/users/<int:user_id>/followed', methods=['GET'])
 def get_followed(user_id):
     user = User.query.get_or_404(user_id)
     page = request.args.get(key='page', default=1, type=int)
@@ -43,7 +43,7 @@ def get_followed(user_id):
     return jsonify(data)
 
 
-@bp.route('/api/users')
+@bp.route('/api/v1/users')
 class API_Users(MethodView):
 
     @bp.response(200, UsersCollectionDataSchema)
