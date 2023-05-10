@@ -5,3 +5,5 @@ FLASK_DEBUG=1
 POSTS_PER_PAGE=20
 # Logging
 LOG_TO_STDOUT=1
+# SecretKey
+SECRET_KEY=you-will-never-guess
