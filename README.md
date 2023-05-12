@@ -48,3 +48,5 @@
 - Might explore a use-case for postgres stored procedures to put computation on the server side
 - Might add in test coverage capability to the CLI and improve the testing suite
 - Looking into breaking out the Javascript into their own files to unclutter the base.html file
+- Investigating where asynchronous calls can be made for scalability now that it is available in Flask 2.0
+- ^Need to look into which web server needs to be used to support this and how to implement it
