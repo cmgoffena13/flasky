@@ -20,7 +20,8 @@
 - Search capability on posts
 - Can be switched to other languages once translation files are filled out
 - Logs to text files, stdout stream, and emails ADMIN upon errors depending upon configuration
-- API functionality
+- API authentication and authorization
+- API calls for user operations and token generation / management
 
 ### Modifications that I introduced:
 - Using Postgres instead of SQLite
@@ -37,10 +38,12 @@
 - Added flask-smorest package for API and marshmallow schemas for validation (re-structured to accommodate)
 - Includes API swagger documentation at localhost:5000/swagger-ui
 - Setup Postman collections and environment to test the API calls
+- Added in logging for queries to see queries in debug and to log slow queries in production
 
 ### Notes:
 - Skipping the azure translator service currently
-- Currently working through Chapter 23, adding API functionality
+- Tutorial is complete, just adding in additional functionality and improving upon it at this point
 - Might look into adding more logging, tutorial skipped it and could add more detail than gunicorn/flask provides
 - Need postgres and elasticsearch locally installed, had issues with max mem for docker elasticsearch so kept local
 - Might explore a use-case for postgres stored procedures to put computation on the server side
+- Might add in test coverage capability to the CLI and improve the testing suite
