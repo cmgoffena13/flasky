@@ -47,3 +47,4 @@
 - Need postgres and elasticsearch locally installed, had issues with max mem for docker elasticsearch so kept local
 - Might explore a use-case for postgres stored procedures to put computation on the server side
 - Might add in test coverage capability to the CLI and improve the testing suite
+- Looking into breaking out the Javascript into their own files to unclutter the base.html file
