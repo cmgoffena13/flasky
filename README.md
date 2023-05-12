@@ -4,7 +4,8 @@
 ## Local Development Setup
 1. Create .env and .flaskenv files based upon example files (Doesn't require azure translator service)
 2. Install local Postgres server and create database flasky
-3. Install local elasticsearch server, I ran into a maxmem error when trying docker
+3. Install local elasticsearch server, I ran into a maxmem error when trying docker (needed for search capability)
+4. Install Docker if you don't have it already
 4. Run docker command `docker compose up`
 
 ### Application Functionality (Simple Social Media App)
