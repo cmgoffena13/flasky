@@ -1,12 +1,30 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, current_app
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _
+from flask_sqlalchemy import get_debug_queries
 from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User
 from app.auth.email import send_password_reset_email
+
+
+@bp.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if current_app.debug or current_app.testing:
+            current_app.logger.info(f'Query: {query.statement} \
+                                    \nParameters:{query.parameters} \
+                                    \nDuration:{query.duration} \
+                                    \nContext:{query.context}')
+        if not current_app.debug and not current_app.testing:
+            if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+                current_app.logger.warning(f'Query: {query.statement} \
+                                           \nParameters:{query.parameters} \
+                                           \nDuration:{query.duration} \
+                                           \nContext:{query.context}')
+    return response
 
 
 @bp.route('/login', methods=['GET', 'POST'])

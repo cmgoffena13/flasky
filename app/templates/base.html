@@ -106,6 +106,7 @@
             });
         }
         
+        // Function to show profile popups for users
         // $() means its triggered when the page is rendered
         $(function() {
             var timer = null;
@@ -156,6 +157,7 @@
             $('#message_count').css('visibility', n ? 'visible' : 'hidden');
         };
 
+        // Function to check sinceNotifications every 10 seconds
         {% if current_user.is_authenticated %}
         $(function() {
             var since = 0;
@@ -180,6 +182,7 @@
         });
         {% endif %}
 
+        // Shows Task progress bar
         function set_task_progress(task_id, progress) {
             $('#' + task_id + '-progress').text(progress);
         }

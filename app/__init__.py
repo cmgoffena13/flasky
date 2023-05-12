@@ -105,6 +105,7 @@ def create_app(config_class=Config):
             app.logger.addHandler(file_handler)
             app.logger.setLevel(logging.INFO)
             app.logger.info('Flasky startup')
+            app.logger.info(f"Flask Debug: {app.config['FLASK_DEBUG']}")
     return app
 
 

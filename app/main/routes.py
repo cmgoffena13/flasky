@@ -8,6 +8,7 @@ from app.main.forms import EditProfileForm, EmptyForm, PostForm, SearchForm, Mes
 from app.models import User, Post, Message, Notification
 from app.translate import translate
 from app.main import bp
+from flask_sqlalchemy import get_debug_queries
 
 
 @bp.before_app_request
@@ -17,6 +18,23 @@ def before_request():
         db.session.commit()
         g.search_form = SearchForm()
     g.locale = str(get_locale())
+
+
+@bp.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if current_app.debug or current_app.testing:
+            current_app.logger.info(f'Query: {query.statement} \
+                                    \nParameters:{query.parameters} \
+                                    \nDuration:{query.duration} \
+                                    \nContext:{query.context}')
+        if not current_app.debug and not current_app.testing:
+            if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+                current_app.logger.warning(f'Query: {query.statement} \
+                                           \nParameters:{query.parameters} \
+                                           \nDuration:{query.duration} \
+                                           \nContext:{query.context}')
+    return response
 
 
 @bp.route('/index', methods=['GET', 'POST'])
