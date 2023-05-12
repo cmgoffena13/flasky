@@ -23,7 +23,6 @@ class PlainUserSchema(Schema):
     user_id = fields.Int(dump_only=True)
     username = fields.Str(required=True)
     email = fields.Email(required=False)
-    password = fields.Str(required=False)
     last_seen = fields.DateTime()
     about_me = fields.Str()
 
@@ -31,7 +30,6 @@ class UserDataSchema(PlainUserSchema):
     user_id = fields.Int(dump_only=True)
     username = fields.Str(required=True)
     email = fields.Email(required=False)
-    password = fields.Str(required=False)
     last_seen = fields.DateTime()
     about_me = fields.Str()
     post_count = fields.Int()
@@ -44,16 +42,12 @@ class UsersCollectionDataSchema(Schema):
     _meta = fields.Nested(UsersCollectionMetaSchema(), dump_only=True)
     _links = fields.Nested(UsersCollectionLinkSchema(), dump_only=True)
 
-
-
-
-
-# TODO: Need to expand
-class UserUpdateSchema(Schema):
-    username = fields.Str()
-    email = fields.Str()
-
-# TODO:  Need to expand
 class UserRegisterSchema(Schema):
     username = fields.Str(required=True)
-    email = fields.Str(required=True)
+    email = fields.Email(required=True)
+    password = fields.Str(required=True)
+
+class UserUpdateSchema(Schema):
+    username = fields.Str()
+    email = fields.Email()
+    about_me = fields.Str()

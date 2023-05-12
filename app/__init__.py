@@ -69,8 +69,9 @@ def create_app(config_class=Config):
     app.register_blueprint(blueprint=main_bp)
 
     # register API blueprints
-    from app.api import users_v1
+    from app.api import users_v1, tokens_v1
     api.register_blueprint(blp=users_v1)
+    api.register_blueprint(blp=tokens_v1)
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
