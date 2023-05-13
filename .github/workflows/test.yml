@@ -20,10 +20,10 @@ jobs:
             pip install -r requirements.txt
 
          - name: Run tests
-           run: pytest -v -l --junitxml=tests/reports/junit-{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xml
+           run: pytest -v -l --junitxml=tests/reports/junit-$(date +'%Y-%m-%d_%H-%M-%S').xml
 
          - name: Upload test results
            uses: actions/upload-artifact@v2
            with:
             name: test-results
-            path: tests/reports/junit-{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xml
+            path: tests/reports/junit-$(date +'%Y-%m-%d_%H-%M-%S').xml
