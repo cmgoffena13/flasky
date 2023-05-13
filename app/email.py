@@ -9,10 +9,10 @@ def send_async_mail(app, msg):
         mail.send(msg)
 
 
-def send_email(subject, sender, recipients, text_body, html_body, attachments=None, sync=False):
-    msg = Message(subject=subject,
-                  sender=sender,
-                  recipients=recipients)
+def send_email(
+    subject, sender, recipients, text_body, html_body, attachments=None, sync=False
+):
+    msg = Message(subject=subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
     if attachments:
@@ -21,4 +21,6 @@ def send_email(subject, sender, recipients, text_body, html_body, attachments=No
     if sync:
         mail.send(msg)
     else:
-        Thread(target=send_async_mail, args=(current_app._get_current_object(), msg)).start()
+        Thread(
+            target=send_async_mail, args=(current_app._get_current_object(), msg)
+        ).start()
