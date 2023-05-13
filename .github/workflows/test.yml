@@ -25,7 +25,7 @@ jobs:
            run: pytest -v -l
 
          - name: Upload test results
-           uses: actions/upload-artificat@v2
+           uses: actions/upload-artifact@v2
            with:
             name: test-results
             path: tests/reports/
